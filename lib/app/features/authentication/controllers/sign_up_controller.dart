@@ -26,8 +26,6 @@ abstract class _SignUpControllerBase with Store {
   @observable
   TextEditingController nameField = TextEditingController();
   @observable
-  bool terms = false;
-  @observable
   TextEditingController emailField = TextEditingController();
   @observable
   TextEditingController passwordField = TextEditingController();

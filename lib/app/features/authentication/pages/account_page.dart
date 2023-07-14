@@ -19,26 +19,51 @@ class _AccountPageState extends State<AccountPage> {
     UserModel user = sessionController.user!;
 
     return Scaffold(
-      appBar: AppBar(actions: [
-        IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed('/address');
-            },
-            icon: const Icon(Icons.map))
-      ]),
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(user.email),
-            Text(user.name),
-            Text(user.id.toString()),
-            ElevatedButton(
-              onPressed: () {
+            const SizedBox(
+              height: 40,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.lightBlue[200]),
+                    child: Center(
+                      child: Text(
+                        user.name.substring(0, 2).toUpperCase(),
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    )),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                  child: Text(user.email),
+                ),
+                Text('${user.name}#${user.id.toStringAsFixed(3).substring(2)}'),
+              ],
+            ),
+            ListTile(
+              leading: const Icon(Icons.map),
+              title: const Text('Addresses'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/address');
+              },
+              trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+            ),
+            ListTile(
+              leading: const Icon(Icons.exit_to_app_rounded),
+              title: const Text('Logout'),
+              onTap: () {
                 sessionController.logout();
                 Navigator.of(context).pushReplacementNamed('/authentication');
               },
-              child: const Text('Logout'),
-            )
+              trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+            ),
           ],
         ),
       ),

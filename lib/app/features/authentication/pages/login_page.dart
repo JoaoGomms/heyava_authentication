@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 import 'package:heyava_authentication/app/assets/texts/authentication_texts.dart';
 import 'package:heyava_authentication/app/features/authentication/controllers/login_controller.dart';
 import 'package:heyava_authentication/app/features/authentication/pages/components/button/app_elevated_button.dart';
-import 'package:heyava_authentication/app/features/authentication/pages/components/text_field/app_text_field.dart';
 import 'package:heyava_authentication/app/features/authentication/pages/components/text_field/email_text_field.dart';
 import 'package:heyava_authentication/app/features/authentication/pages/components/text_field/password_text_field.dart';
 

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:heyava_authentication/app/assets/texts/authentication_texts.dart';
 import 'package:heyava_authentication/app/features/authentication/pages/login_page.dart';
 import 'package:heyava_authentication/app/features/authentication/pages/sign_up_page.dart';
-
-import 'components/authentication_top_info.dart';
 
 class AuthenticationPage extends StatefulWidget {
   const AuthenticationPage({super.key});
@@ -19,6 +16,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
     tabController = TabController(
       vsync: this,
@@ -29,55 +27,32 @@ class _AuthenticationPageState extends State<AuthenticationPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: SizedBox(
-          height: MediaQuery.sizeOf(context).height,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 80.0),
-                child: AuthenticationTopInfo(),
-              ),
-              TabBar(
-                controller: tabController,
-                tabs: [
-                  _buildTab(AuthenticationTexts.loginButton),
-                  _buildTab(AuthenticationTexts.singupButton)
-                ],
-                labelColor: Colors.black,
-                onTap: (page) {
-                  pageController.animateToPage(page,
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.easeIn);
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(children: [
+            const Text('TESTEEE'),
+            TabBar(
+              controller: tabController,
+              tabs: const [Text('Login'), Text('signup')],
+              labelColor: Colors.black,
+            ),
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height * 0.7,
+              child: PageView(
+                controller: pageController,
+                scrollDirection: Axis.horizontal,
+                onPageChanged: (page) {
+                  tabController.animateTo(page);
                 },
+                children: const [
+                  LoginPage(),
+                  SignUpPage(),
+                ],
               ),
-              Expanded(
-                child: PageView(
-                  physics: const BouncingScrollPhysics(),
-                  controller: pageController,
-                  scrollDirection: Axis.horizontal,
-                  onPageChanged: (page) {
-                    tabController.animateTo(page);
-                  },
-                  children: const [
-                    LoginPage(),
-                    SignUpPage(),
-                  ],
-                ),
-              )
-            ],
-          ),
+            )
+          ]),
         ),
       ),
     );
   }
-
-  _buildTab(label) => Padding(
-        padding: const EdgeInsets.only(
-          bottom: 8,
-        ),
-        child: Text(label),
-      );
 }

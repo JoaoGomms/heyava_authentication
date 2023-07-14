@@ -21,8 +21,8 @@ class UserModel {
   factory UserModel.fromMap(Map<String, dynamic> map) => UserModel(
         num.parse(map['id'].toString()),
         map['name'],
-        map['email'],
         map['password'],
-        num.parse(map['id'].toString()),
+        map['email'],
+        num.parse(map['addressId'].toString()),
       );
 }

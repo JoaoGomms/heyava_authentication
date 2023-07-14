@@ -25,6 +25,22 @@ mixin _$SignUpController on _SignUpControllerBase, Store {
     });
   }
 
+  late final _$termsAtom =
+      Atom(name: '_SignUpControllerBase.terms', context: context);
+
+  @override
+  bool get terms {
+    _$termsAtom.reportRead();
+    return super.terms;
+  }
+
+  @override
+  set terms(bool value) {
+    _$termsAtom.reportWrite(value, super.terms, () {
+      super.terms = value;
+    });
+  }
+
   late final _$emailFieldAtom =
       Atom(name: '_SignUpControllerBase.emailField', context: context);
 
@@ -86,6 +102,7 @@ mixin _$SignUpController on _SignUpControllerBase, Store {
   String toString() {
     return '''
 nameField: ${nameField},
+terms: ${terms},
 emailField: ${emailField},
 passwordField: ${passwordField},
 confirmPasswordField: ${confirmPasswordField}

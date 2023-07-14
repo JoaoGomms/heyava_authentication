@@ -85,7 +85,13 @@ class DatabaseHelper {
     var dbClient = await db;
     var result = await dbClient.query(
       userTableName,
-      columns: [columnUserId, columnName, columnEmail, columnPassword],
+      columns: [
+        columnUserId,
+        columnName,
+        columnEmail,
+        columnPassword,
+        foreignKeyAddressId
+      ],
       where: '$columnEmail = ? AND $columnPassword = ?',
       whereArgs: [userEmail, userPassword],
     );

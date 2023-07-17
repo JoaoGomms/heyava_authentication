@@ -33,7 +33,7 @@ class _AppTextFieldState extends State<AppTextField> {
         keyboardType: widget.keyboardType,
         focusNode: widget.focusNode,
         decoration: InputDecoration(
-          prefixIcon: Icon(widget.icon),
+          prefixIcon: widget.icon != null ? Icon(widget.icon) : null,
           suffixIcon: widget.keyboardType == TextInputType.visiblePassword
               ? IconButton(
                   icon: Icon(widget.obscureText
@@ -46,7 +46,10 @@ class _AppTextFieldState extends State<AppTextField> {
                   },
                 )
               : null,
-          label: Text(widget.label),
+          label: Padding(
+            padding: EdgeInsets.only(left: widget.icon != null ? 0.0 : 8.0),
+            child: Text(widget.label),
+          ),
         ),
       ),
     );

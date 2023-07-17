@@ -36,7 +36,7 @@ class _AccountPageState extends State<AccountPage> {
                         shape: BoxShape.circle, color: Colors.lightBlue[200]),
                     child: Center(
                       child: Text(
-                        user.name.substring(0, 2).toUpperCase(),
+                        user.name.substring(0, 0).toUpperCase(),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     )),

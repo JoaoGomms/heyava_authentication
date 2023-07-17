@@ -30,11 +30,9 @@ class _AuthenticationPageState extends State<AuthenticationPage>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
         child: SizedBox(
           height: MediaQuery.sizeOf(context).height,
           child: Column(
-            mainAxisSize: MainAxisSize.max,
             children: [
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 80.0),
@@ -66,7 +64,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                     SignUpPage(),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

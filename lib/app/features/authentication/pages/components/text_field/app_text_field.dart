@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppTextField extends StatefulWidget {
   final TextEditingController controller;
@@ -7,6 +8,9 @@ class AppTextField extends StatefulWidget {
   final IconData? icon;
   final FocusNode? focusNode;
   bool obscureText;
+  final int? maxLength;
+  final List<TextInputFormatter>? inputFormatters;
+  final String? Function(String?)? validator;
 
   AppTextField({
     Key? key,
@@ -16,6 +20,9 @@ class AppTextField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.focusNode,
     this.obscureText = false,
+    this.maxLength,
+    this.inputFormatters,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -27,7 +34,10 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextField(
+      child: TextFormField(
+        validator: widget.validator,
+        maxLength: widget.maxLength,
+        inputFormatters: widget.inputFormatters,
         obscureText: widget.obscureText,
         controller: widget.controller,
         keyboardType: widget.keyboardType,

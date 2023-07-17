@@ -18,6 +18,8 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   SignUpController controller = GetIt.I.get<SignUpController>();
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     controller.setupCallbacks(() {
@@ -27,39 +29,55 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            EmailTextField(controller: controller.emailField),
-            AppTextField(
-              controller: controller.nameField,
-              icon: Icons.person_outline,
-              label: 'Seu nome',
-            ),
-            PasswordTextField(controller: controller.passwordField),
-            PasswordTextField(
-              controller: controller.confirmPasswordField,
-            ),
-            AppElevatedButton(
-                onPressed: () => controller.signUp(),
-                text: AuthenticationTexts.singupButton),
-            Row(
-              children: [
-                Observer(builder: (context) {
-                  return Checkbox(
-                    value: controller.terms,
-                    onChanged: (value) => controller.terms = value!,
-                  );
-                }),
-                Flexible(
-                    child: Text(
-                  AuthenticationTexts.singupTerms,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ))
-              ],
-            )
-          ],
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              EmailTextField(controller: controller.emailField),
+              AppTextField(
+                validator: (value) {
+                  if (value != null && value.length < 3) {
+                    return 'Insira seu nome';
+                  }
+
+                  return null;
+                },
+                controller: controller.nameField,
+                icon: Icons.person_outline,
+                label: 'Seu nome',
+              ),
+              PasswordTextField(controller: controller.passwordField),
+              PasswordTextField(
+                controller: controller.confirmPasswordField,
+              ),
+              AppElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      controller.signUp();
+                    }
+                  },
+                  text: AuthenticationTexts.singupButton),
+              Flexible(
+                child: Row(
+                  children: [
+                    Observer(builder: (context) {
+                      return Checkbox(
+                        value: controller.terms,
+                        onChanged: (value) => controller.terms = value!,
+                      );
+                    }),
+                    Flexible(
+                        child: Text(
+                      AuthenticationTexts.singupTerms,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ))
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

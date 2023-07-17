@@ -57,19 +57,19 @@ mixin _$AddressController on _AddressControllerBase, Store {
     });
   }
 
-  late final _$complementdFieldAtom =
-      Atom(name: '_AddressControllerBase.complementdField', context: context);
+  late final _$complementFieldAtom =
+      Atom(name: '_AddressControllerBase.complementField', context: context);
 
   @override
-  TextEditingController get complementdField {
-    _$complementdFieldAtom.reportRead();
-    return super.complementdField;
+  TextEditingController get complementField {
+    _$complementFieldAtom.reportRead();
+    return super.complementField;
   }
 
   @override
-  set complementdField(TextEditingController value) {
-    _$complementdFieldAtom.reportWrite(value, super.complementdField, () {
-      super.complementdField = value;
+  set complementField(TextEditingController value) {
+    _$complementFieldAtom.reportWrite(value, super.complementField, () {
+      super.complementField = value;
     });
   }
 
@@ -121,13 +121,37 @@ mixin _$AddressController on _AddressControllerBase, Store {
     });
   }
 
+  late final _$updateAddressAsyncAction =
+      AsyncAction('_AddressControllerBase.updateAddress', context: context);
+
+  @override
+  Future<void> updateAddress(num id) {
+    return _$updateAddressAsyncAction.run(() => super.updateAddress(id));
+  }
+
+  late final _$deleteAddressAsyncAction =
+      AsyncAction('_AddressControllerBase.deleteAddress', context: context);
+
+  @override
+  Future<void> deleteAddress(num id) {
+    return _$deleteAddressAsyncAction.run(() => super.deleteAddress(id));
+  }
+
+  late final _$fetchAddressListAsyncAction =
+      AsyncAction('_AddressControllerBase.fetchAddressList', context: context);
+
+  @override
+  Future<void> fetchAddressList() {
+    return _$fetchAddressListAsyncAction.run(() => super.fetchAddressList());
+  }
+
   @override
   String toString() {
     return '''
 addressList: ${addressList},
 cepField: ${cepField},
 streetField: ${streetField},
-complementdField: ${complementdField},
+complementField: ${complementField},
 neighbourhoodField: ${neighbourhoodField},
 localField: ${localField},
 stateField: ${stateField}

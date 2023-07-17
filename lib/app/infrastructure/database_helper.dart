@@ -43,13 +43,15 @@ class DatabaseHelper {
 
   _onCreate(Database db, int version) async {
     await db.execute("CREATE TABLE $addressTableName ("
-        " $columnAddressId TEXT, "
+        " $foreignKeyAddressId TEXT, "
         " $columnCep TEXT, "
         " $columnStreet TEXT, "
         " $columnComplement TEXT, "
         " $columnNeighbourhood TEXT, "
         " $columnLocal TEXT, "
-        " $columnState TEXT"
+        " $columnState TEXT,"
+        " $columnAddressId TEXT,"
+        " PRIMARY KEY ($columnAddressId)"
         ")");
 
     await db.execute("CREATE TABLE $userTableName ("
@@ -59,7 +61,7 @@ class DatabaseHelper {
         " $columnPassword TEXT, "
         " $foreignKeyAddressId TEXT, "
         " PRIMARY KEY ($columnUserId)"
-        " FOREIGN KEY ($foreignKeyAddressId) REFERENCES $addressTableName ($columnAddressId)"
+        " FOREIGN KEY ($foreignKeyAddressId) REFERENCES $addressTableName ($foreignKeyAddressId)"
         ")");
   }
 
@@ -137,7 +139,7 @@ class DatabaseHelper {
   Future<List<AddressModel>> getAddressList(num userAddressId) async {
     var dbClient = await db;
     var result = await dbClient.rawQuery(
-        "SELECT * FROM $addressTableName WHERE $columnAddressId = $userAddressId");
+        "SELECT * FROM $addressTableName WHERE $foreignKeyAddressId = $userAddressId");
 
     List<AddressModel> addressList = [];
 
@@ -152,11 +154,12 @@ class DatabaseHelper {
 
   Future<int> updateAddress(AddressModel address) async {
     var dbClient = await db;
-    var result = await dbClient.update(userTableName, address.toMap());
+    var result = await dbClient.update(addressTableName, address.toMap(),
+        where: '$columnAddressId = ? ', whereArgs: [address.id]);
     return result;
   }
 
-  Future<int> deleteAddress(String addressId) async {
+  Future<int> deleteAddress(num addressId) async {
     var dbClient = await db;
     var result = await dbClient.delete(addressTableName,
         where: '$columnAddressId = ?', whereArgs: [addressId]);

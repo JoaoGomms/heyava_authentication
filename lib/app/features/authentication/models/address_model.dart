@@ -1,5 +1,6 @@
 class AddressModel {
   final num id;
+  final num addressId;
   final String cep;
   final String street;
   final String complement;
@@ -8,7 +9,7 @@ class AddressModel {
   final String state;
 
   AddressModel(this.id, this.cep, this.street, this.complement,
-      this.neighbourhood, this.local, this.state);
+      this.neighbourhood, this.local, this.state, this.addressId);
 
   factory AddressModel.fromMap(Map<String, dynamic> map) => AddressModel(
         num.parse(map['id']),
@@ -18,6 +19,7 @@ class AddressModel {
         map['neighbourhood'],
         map['local'],
         map['state'],
+        num.parse(map['addressId']),
       );
 
   Map<String, dynamic> toMap() => {
@@ -28,5 +30,6 @@ class AddressModel {
         'neighbourhood': neighbourhood,
         'local': local,
         'state': state,
+        'addressId': addressId,
       };
 }

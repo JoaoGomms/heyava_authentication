@@ -1,15 +1,18 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:heyava_authentication/app/features/authentication/models/address_model.dart';
 import 'package:heyava_authentication/app/infrastructure/database_helper.dart';
+import 'package:heyava_authentication/app/infrastructure/http_client/viacep/mixin.dart';
 import 'package:heyava_authentication/app/infrastructure/session_controller.dart';
 import 'package:mobx/mobx.dart';
 part 'address_controller.g.dart';
 
 class AddressController = _AddressControllerBase with _$AddressController;
 
-abstract class _AddressControllerBase with Store {
+abstract class _AddressControllerBase with Store, CepClient {
   final DatabaseHelper db;
   final SessionController sessionController;
 
@@ -30,6 +33,24 @@ abstract class _AddressControllerBase with Store {
   TextEditingController localField = TextEditingController();
   @observable
   TextEditingController stateField = TextEditingController();
+
+  @observable
+  bool isLoadingAddressFromCep = false;
+
+  void cepReaction() async {
+    if (cepField.text.length != 8) {
+      return;
+    }
+
+    isLoadingAddressFromCep = true;
+    var address = await getAddressByCep(cepField.text);
+    streetField.text = address.street;
+    complementField.text = address.complement;
+    neighbourhoodField.text = address.neighbourhood;
+    localField.text = address.local;
+    stateField.text = address.state;
+    isLoadingAddressFromCep = false;
+  }
 
   Future<void> saveAddress() async {
     try {
@@ -81,5 +102,20 @@ abstract class _AddressControllerBase with Store {
     addressList.clear();
     addressList.addAll(result);
     addressList = addressList;
+  }
+
+  Future<AddressModel> getAddressByCep(String cep) async {
+    try {
+      Response response = await cepClient.get('/$cep/json');
+
+      if (response.statusCode == HttpStatus.ok) {
+        return AddressModel.fromViaCep(response.data);
+      }
+
+      throw Exception();
+    } catch (e) {
+      print(e);
+      throw Exception();
+    }
   }
 }

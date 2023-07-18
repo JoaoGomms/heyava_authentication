@@ -1,8 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:heyava_authentication/app/features/authentication/controllers/address_controller.dart';
 import 'package:heyava_authentication/app/features/authentication/controllers/login_controller.dart';
 import 'package:heyava_authentication/app/features/authentication/controllers/sign_up_controller.dart';
 import 'package:heyava_authentication/app/infrastructure/database_helper.dart';
+import 'package:heyava_authentication/app/infrastructure/http_client/viacep/cep_client.dart';
 import 'package:heyava_authentication/app/infrastructure/session_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,6 +25,10 @@ void registerControllers() {
       () => SignUpController(GetIt.I(), GetIt.I()));
   GetIt.I.registerFactory<AddressController>(
       () => AddressController(GetIt.I(), GetIt.I()));
+}
+
+void registerClients() {
+  GetIt.I.registerFactory<Dio>(() => cepClient(), instanceName: 'cepClient');
 }
 
 void getLocalData() {

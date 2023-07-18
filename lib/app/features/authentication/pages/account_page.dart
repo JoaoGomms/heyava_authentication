@@ -94,6 +94,14 @@ class _AccountPageState extends State<AccountPage> {
               },
               trailing: const Icon(Icons.keyboard_arrow_right_rounded),
             ),
+            ListTile(
+              leading: const Icon(Icons.view_carousel_outlined),
+              title: const Text('Onboarding'),
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed('/onboarding');
+              },
+              trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+            ),
           ],
         ),
       ),

@@ -25,10 +25,28 @@ mixin _$SessionController on _SessionControllerBase, Store {
     });
   }
 
+  late final _$isOnboardingCompletedAtom = Atom(
+      name: '_SessionControllerBase.isOnboardingCompleted', context: context);
+
+  @override
+  bool get isOnboardingCompleted {
+    _$isOnboardingCompletedAtom.reportRead();
+    return super.isOnboardingCompleted;
+  }
+
+  @override
+  set isOnboardingCompleted(bool value) {
+    _$isOnboardingCompletedAtom.reportWrite(value, super.isOnboardingCompleted,
+        () {
+      super.isOnboardingCompleted = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
-user: ${user}
+user: ${user},
+isOnboardingCompleted: ${isOnboardingCompleted}
     ''';
   }
 }

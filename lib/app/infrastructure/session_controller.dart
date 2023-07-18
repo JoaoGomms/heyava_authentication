@@ -14,6 +14,9 @@ abstract class _SessionControllerBase with Store {
   @observable
   UserModel? user;
 
+  @observable
+  bool isOnboardingCompleted = false;
+
   _SessionControllerBase(this.sp);
 
   setupReactions() {
@@ -24,6 +27,9 @@ abstract class _SessionControllerBase with Store {
       }
 
       sp.setString('user', jsonEncode(user!.toMap()));
+    });
+    reaction((p0) => isOnboardingCompleted, (p0) {
+      sp.setBool('isOnboardingCompleted', isOnboardingCompleted);
     });
   }
 
@@ -36,6 +42,11 @@ abstract class _SessionControllerBase with Store {
       this.user = UserModel(
           user.id, user.name, user.password, user.email, user.addressId);
     }
+
+    var localIsOnboardingCompleted =
+        sp.getBool('isOnboardingCompleted') ?? false;
+
+    isOnboardingCompleted = localIsOnboardingCompleted;
   }
 
   logout() {

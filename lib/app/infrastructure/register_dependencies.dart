@@ -17,12 +17,12 @@ void registerControllers() {
   GetIt.I.registerSingleton<SessionController>(SessionController(GetIt.I()));
   getLocalData();
 
-  GetIt.I.registerFactory<LoginController>(
-      () => LoginController(GetIt.I(), GetIt.I()));
-  GetIt.I.registerFactory<SignUpController>(
-      () => SignUpController(GetIt.I(), GetIt.I()));
-  GetIt.I.registerFactory<AddressController>(
-      () => AddressController(GetIt.I(), GetIt.I()));
+  GetIt.I.registerSingleton<LoginController>(
+      LoginController(GetIt.I(), GetIt.I()));
+  GetIt.I.registerSingleton<SignUpController>(
+      SignUpController(GetIt.I(), GetIt.I()));
+  GetIt.I.registerSingleton<AddressController>(
+      AddressController(GetIt.I(), GetIt.I()));
 }
 
 void getLocalData() {

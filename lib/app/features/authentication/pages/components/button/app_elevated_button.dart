@@ -14,7 +14,10 @@ class AppElevatedButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 24.0),
       child: SizedBox(
           height: height,
-          child: ElevatedButton(onPressed: onPressed, child: Text(text))),
+          child: ElevatedButton(
+            onPressed: onPressed,
+            child: Text(text),
+          )),
     );
   }
 }

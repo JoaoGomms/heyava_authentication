@@ -36,7 +36,7 @@ class _AccountPageState extends State<AccountPage> {
                         shape: BoxShape.circle, color: Colors.lightBlue[200]),
                     child: Center(
                       child: Text(
-                        user.name.substring(0, 0).toUpperCase(),
+                        user.name.substring(0, 2).toUpperCase(),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     )),
@@ -46,6 +46,9 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 Text('${user.name}#${user.id.toStringAsFixed(3).substring(2)}'),
               ],
+            ),
+            const SizedBox(
+              height: 36,
             ),
             ListTile(
               leading: const Icon(Icons.map),

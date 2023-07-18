@@ -35,7 +35,19 @@ class _SignUpPageState extends State<SignUpPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // EmailTextField(controller: controller.emailField),
+              EmailTextField(
+                controller: controller.emailField,
+                validator: (value) {
+                  if (value == null ||
+                      value.isEmpty ||
+                      !value.contains('@') ||
+                      !value.contains('.')) {
+                    return 'E-mail inválido, verifique se está faltando algo';
+                  }
+
+                  return null;
+                },
+              ),
               AppTextField(
                 validator: (value) {
                   if (value != null && value.length < 3) {
@@ -48,9 +60,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 icon: Icons.person_outline,
                 label: 'Seu nome',
               ),
-              PasswordTextField(controller: controller.passwordField),
+              PasswordTextField(
+                controller: controller.passwordField,
+                validator: _validatorPasswordField,
+              ),
               PasswordTextField(
                 controller: controller.confirmPasswordField,
+                validator: _validatorPasswordField,
               ),
               AppElevatedButton(
                   onPressed: () {
@@ -81,5 +97,20 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  String? _validatorPasswordField(value) {
+    if (value == null) {
+      return 'Preencha a senha';
+    }
+    if (controller.confirmPasswordField.text != controller.passwordField.text) {
+      return 'As senhas não coincidem';
+    }
+
+    if (value.length < 6) {
+      return 'A senha deve possuir pelo menos 6 caracteres';
+    }
+
+    return null;
   }
 }

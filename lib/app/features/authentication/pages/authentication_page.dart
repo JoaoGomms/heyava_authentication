@@ -35,7 +35,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
           child: Column(
             children: [
               const Padding(
-                padding: EdgeInsets.symmetric(vertical: 80.0),
+                padding: EdgeInsets.only(top: 60.0, bottom: 40),
                 child: AuthenticationTopInfo(),
               ),
               TabBar(

@@ -46,8 +46,9 @@ class _AddressPageState extends State<AddressPage> {
                     AddressModel item = controller.addressList[index];
                     return Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.grey),
+                        border: Border.all(color: Colors.blue, width: 1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                       margin: const EdgeInsets.symmetric(
                           horizontal: 12.0, vertical: 8),
                       padding: const EdgeInsets.symmetric(
@@ -86,19 +87,23 @@ _addressData(BuildContext context, AddressModel item) => Column(
       children: [
         Text(
           item.street,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        Text(
-          item.neighbourhood,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 2.0),
+          child: Text(
+            item.neighbourhood,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
         Text(
-          '${item.local}-${item.state}',
+          '${item.local} - ${item.state}',
           style: Theme.of(context).textTheme.bodyMedium,
         ),
-        Text(
-          item.complement,
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
+        if (item.complement.isNotEmpty)
+          Text(
+            item.complement,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
       ],
     );

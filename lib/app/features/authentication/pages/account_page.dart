@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:heyava_authentication/app/features/authentication/controllers/change_password_controller.dart';
 import 'package:heyava_authentication/app/features/authentication/pages/components/change_password_dialog.dart';
+import 'package:heyava_authentication/app/features/authentication/pages/components/toast/alert_toast.dart';
 import 'package:heyava_authentication/app/infrastructure/session_controller.dart';
 import '../models/user_model.dart';
+import 'components/toast/error_toast.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -13,6 +17,8 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   SessionController sessionController = GetIt.I.get<SessionController>();
+  ChangePasswordController changePasswordController =
+      GetIt.I.get<ChangePasswordController>();
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +64,16 @@ class _AccountPageState extends State<AccountPage> {
               },
               trailing: const Icon(Icons.keyboard_arrow_right_rounded),
             ),
+            Observer(builder: (context) {
+              if (changePasswordController.passwordWasChanged) {
+                return const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: AlertToast(label: 'Sua senha foi alterada'),
+                );
+              }
+
+              return Container();
+            }),
             ListTile(
               leading: const Icon(Icons.password),
               title: const Text('Alterar Senha'),

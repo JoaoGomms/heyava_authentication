@@ -61,6 +61,23 @@ mixin _$ChangePasswordController on _ChangePasswordControllerBase, Store {
     });
   }
 
+  late final _$passwordWasChangedAtom = Atom(
+      name: '_ChangePasswordControllerBase.passwordWasChanged',
+      context: context);
+
+  @override
+  bool get passwordWasChanged {
+    _$passwordWasChangedAtom.reportRead();
+    return super.passwordWasChanged;
+  }
+
+  @override
+  set passwordWasChanged(bool value) {
+    _$passwordWasChangedAtom.reportWrite(value, super.passwordWasChanged, () {
+      super.passwordWasChanged = value;
+    });
+  }
+
   late final _$updatePasswordAsyncAction = AsyncAction(
       '_ChangePasswordControllerBase.updatePassword',
       context: context);
@@ -75,7 +92,8 @@ mixin _$ChangePasswordController on _ChangePasswordControllerBase, Store {
     return '''
 currentPasswordField: ${currentPasswordField},
 newPasswordField: ${newPasswordField},
-confirmNewPasswordField: ${confirmNewPasswordField}
+confirmNewPasswordField: ${confirmNewPasswordField},
+passwordWasChanged: ${passwordWasChanged}
     ''';
   }
 }

@@ -20,6 +20,7 @@ dependencies:
   build_runner: ^2.4.6
   get_it: ^7.6.0
   dio: ^5.2.1+1
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

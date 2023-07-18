@@ -21,12 +21,12 @@ abstract class _ChangePasswordControllerBase with Store {
   TextEditingController newPasswordField = TextEditingController();
   @observable
   TextEditingController confirmNewPasswordField = TextEditingController();
+  @observable
+  bool passwordWasChanged = false;
 
   @action
   Future<void> updatePassword() async {
     UserModel user = sessionController.user!;
-
-    if (newPasswordField.text != confirmNewPasswordField.text) return;
 
     if (currentPasswordField.text == user.password) {
       var userUpdated = UserModel(user.id, user.name, newPasswordField.text,
@@ -34,11 +34,16 @@ abstract class _ChangePasswordControllerBase with Store {
 
       try {
         db.updateUser(userUpdated);
+        sessionController.user = userUpdated;
 
         print('Password Changed');
+        passwordWasChanged = true;
         currentPasswordField.clear();
         newPasswordField.clear();
         confirmNewPasswordField.clear();
+        Future.delayed(const Duration(seconds: 5)).then((value) {
+          passwordWasChanged = false;
+        });
       } catch (e) {
         print(e);
       }

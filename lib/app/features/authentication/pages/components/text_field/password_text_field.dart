@@ -7,12 +7,14 @@ class PasswordTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
+  final String label;
 
   const PasswordTextField({
     Key? key,
     required this.controller,
     this.keyboardType = TextInputType.visiblePassword,
     this.validator,
+    this.label = AuthenticationTexts.passwordField,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class PasswordTextField extends StatelessWidget {
       icon: Icons.lock_outline,
       keyboardType: keyboardType,
       controller: controller,
-      label: AuthenticationTexts.passwordField,
+      label: label,
       obscureText: true,
     );
   }

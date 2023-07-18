@@ -35,7 +35,7 @@ class _SignUpPageState extends State<SignUpPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              EmailTextField(controller: controller.emailField),
+              // EmailTextField(controller: controller.emailField),
               AppTextField(
                 validator: (value) {
                   if (value != null && value.length < 3) {

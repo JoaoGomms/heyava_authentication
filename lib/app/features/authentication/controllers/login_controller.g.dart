@@ -41,6 +41,38 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
+  late final _$formKeyAtom =
+      Atom(name: '_LoginControllerBase.formKey', context: context);
+
+  @override
+  GlobalKey<FormState> get formKey {
+    _$formKeyAtom.reportRead();
+    return super.formKey;
+  }
+
+  @override
+  set formKey(GlobalKey<FormState> value) {
+    _$formKeyAtom.reportWrite(value, super.formKey, () {
+      super.formKey = value;
+    });
+  }
+
+  late final _$errorAtom =
+      Atom(name: '_LoginControllerBase.error', context: context);
+
+  @override
+  String? get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(String? value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
   late final _$loginAsyncAction =
       AsyncAction('_LoginControllerBase.login', context: context);
 
@@ -53,7 +85,9 @@ mixin _$LoginController on _LoginControllerBase, Store {
   String toString() {
     return '''
 emailField: ${emailField},
-passwordField: ${passwordField}
+passwordField: ${passwordField},
+formKey: ${formKey},
+error: ${error}
     ''';
   }
 }

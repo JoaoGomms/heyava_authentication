@@ -44,7 +44,8 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                   _buildTab(AuthenticationTexts.loginButton),
                   _buildTab(AuthenticationTexts.singupButton)
                 ],
-                labelColor: Colors.black,
+                labelColor: Colors.blue,
+                unselectedLabelColor: Colors.black,
                 onTap: (page) {
                   pageController.animateToPage(page,
                       duration: const Duration(milliseconds: 200),
@@ -73,8 +74,8 @@ class _AuthenticationPageState extends State<AuthenticationPage>
   }
 
   _buildTab(label) => Padding(
-        padding: const EdgeInsets.only(
-          bottom: 8,
+        padding: const EdgeInsets.symmetric(
+          vertical: 8,
         ),
         child: Text(label),
       );

@@ -57,12 +57,18 @@ class _AccountPageState extends State<AccountPage> {
               height: 36,
             ),
             ListTile(
-              leading: const Icon(Icons.map),
+              leading: Icon(
+                Icons.map,
+                color: Theme.of(context).iconTheme.color,
+              ),
               title: const Text('Endereços'),
               onTap: () {
                 Navigator.of(context).pushNamed('/address');
               },
-              trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+              trailing: Icon(
+                Icons.keyboard_arrow_right_rounded,
+                color: Theme.of(context).iconTheme.color,
+              ),
             ),
             Observer(builder: (context) {
               if (changePasswordController.passwordWasChanged) {
@@ -75,7 +81,10 @@ class _AccountPageState extends State<AccountPage> {
               return Container();
             }),
             ListTile(
-              leading: const Icon(Icons.password),
+              leading: Icon(
+                Icons.password,
+                color: Theme.of(context).iconTheme.color,
+              ),
               title: const Text('Alterar Senha'),
               onTap: () {
                 showDialog(
@@ -83,24 +92,39 @@ class _AccountPageState extends State<AccountPage> {
                   builder: (context) => ChangePasswordDialog(),
                 );
               },
-              trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+              trailing: Icon(
+                Icons.keyboard_arrow_right_rounded,
+                color: Theme.of(context).iconTheme.color,
+              ),
             ),
             ListTile(
-              leading: const Icon(Icons.exit_to_app_rounded),
+              leading: Icon(
+                Icons.view_carousel_outlined,
+                color: Theme.of(context).iconTheme.color,
+              ),
+              title: const Text('Onboarding'),
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed('/onboarding');
+              },
+              trailing: Icon(
+                Icons.keyboard_arrow_right_rounded,
+                color: Theme.of(context).iconTheme.color,
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.exit_to_app_rounded,
+                color: Theme.of(context).iconTheme.color,
+              ),
               title: const Text('Logout'),
               onTap: () {
                 sessionController.logout();
                 Navigator.of(context).pushReplacementNamed('/authentication');
               },
-              trailing: const Icon(Icons.keyboard_arrow_right_rounded),
-            ),
-            ListTile(
-              leading: const Icon(Icons.view_carousel_outlined),
-              title: const Text('Onboarding'),
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/onboarding');
-              },
-              trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+              trailing: Icon(
+                Icons.keyboard_arrow_right_rounded,
+                color: Theme.of(context).iconTheme.color,
+              ),
             ),
           ],
         ),

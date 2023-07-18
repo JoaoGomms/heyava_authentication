@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 final ThemeData appTheme = ThemeData(
-  textTheme: textTheme,
-);
+    textTheme: textTheme, iconTheme: const IconThemeData(color: Colors.blue));
 
 const TextTheme textTheme = TextTheme(
     titleLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.normal),

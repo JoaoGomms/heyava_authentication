@@ -57,7 +57,8 @@ class _AddressPageState extends State<AddressPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12.0),
                             child: _addressData(context, item),
                           ),
                           IconButton(

@@ -121,6 +121,23 @@ mixin _$AddressController on _AddressControllerBase, Store {
     });
   }
 
+  late final _$isLoadingAddressFromCepAtom = Atom(
+      name: '_AddressControllerBase.isLoadingAddressFromCep', context: context);
+
+  @override
+  bool get isLoadingAddressFromCep {
+    _$isLoadingAddressFromCepAtom.reportRead();
+    return super.isLoadingAddressFromCep;
+  }
+
+  @override
+  set isLoadingAddressFromCep(bool value) {
+    _$isLoadingAddressFromCepAtom
+        .reportWrite(value, super.isLoadingAddressFromCep, () {
+      super.isLoadingAddressFromCep = value;
+    });
+  }
+
   late final _$updateAddressAsyncAction =
       AsyncAction('_AddressControllerBase.updateAddress', context: context);
 
@@ -154,7 +171,8 @@ streetField: ${streetField},
 complementField: ${complementField},
 neighbourhoodField: ${neighbourhoodField},
 localField: ${localField},
-stateField: ${stateField}
+stateField: ${stateField},
+isLoadingAddressFromCep: ${isLoadingAddressFromCep}
     ''';
   }
 }

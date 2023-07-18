@@ -22,6 +22,17 @@ class AddressModel {
         num.parse(map['addressId']),
       );
 
+  factory AddressModel.fromViaCep(Map<String, dynamic> map) => AddressModel(
+        0,
+        map['cep'],
+        map['logradouro'],
+        map['complemento'],
+        map['bairro'],
+        map['localidade'],
+        map['uf'],
+        0,
+      );
+
   Map<String, dynamic> toMap() => {
         'id': id,
         'cep': cep,

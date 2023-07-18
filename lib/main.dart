@@ -9,6 +9,7 @@ void main() async {
 
   await registerDatabase();
   registerControllers();
+  registerClients();
 
   DatabaseHelper dbHelper = GetIt.I.get<DatabaseHelper>();
   await dbHelper.initDatabase();

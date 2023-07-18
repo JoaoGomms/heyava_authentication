@@ -38,6 +38,7 @@ class NewAddressDialog extends StatelessWidget {
                 if (controller.isLoadingAddressFromCep)
                   const LinearProgressIndicator(),
                 AppTextField(
+                  maxLength: 8,
                   controller: controller.cepField,
                   label: 'CEP',
                   onChanged: (value) {
@@ -47,10 +48,12 @@ class NewAddressDialog extends StatelessWidget {
                   },
                 ),
                 AppTextField(
+                    maxLength: 20,
                     controller: controller.streetField,
                     label: 'Rua',
                     enabled: !controller.isLoadingAddressFromCep),
                 AppTextField(
+                    maxLength: 40,
                     controller: controller.complementField,
                     label: 'Complemento',
                     enabled: !controller.isLoadingAddressFromCep),
@@ -59,6 +62,7 @@ class NewAddressDialog extends StatelessWidget {
                     children: [
                       Flexible(
                         child: AppTextField(
+                            maxLength: 20,
                             controller: controller.neighbourhoodField,
                             label: 'Bairro',
                             enabled: !controller.isLoadingAddressFromCep),
@@ -68,6 +72,7 @@ class NewAddressDialog extends StatelessWidget {
                       ),
                       Flexible(
                         child: AppTextField(
+                            maxLength: 2,
                             controller: controller.stateField,
                             label: 'Estado',
                             enabled: !controller.isLoadingAddressFromCep),
@@ -76,6 +81,7 @@ class NewAddressDialog extends StatelessWidget {
                   ),
                 ),
                 AppTextField(
+                    maxLength: 25,
                     controller: controller.localField,
                     label: 'Localidade',
                     enabled: !controller.isLoadingAddressFromCep),

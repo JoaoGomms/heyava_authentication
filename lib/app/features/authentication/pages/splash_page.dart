@@ -28,8 +28,18 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
+    return Scaffold(
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset('assets/images/ava_logo.png'),
+          const SizedBox(
+            height: 40,
+          ),
+          const CircularProgressIndicator(),
+        ],
+      )),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:heyava_authentication/app/features/authentication/pages/components/change_password_dialog.dart';
 import 'package:heyava_authentication/app/infrastructure/session_controller.dart';
-
 import '../models/user_model.dart';
 
 class AccountPage extends StatefulWidget {
@@ -52,9 +52,20 @@ class _AccountPageState extends State<AccountPage> {
             ),
             ListTile(
               leading: const Icon(Icons.map),
-              title: const Text('Addresses'),
+              title: const Text('Endereços'),
               onTap: () {
                 Navigator.of(context).pushNamed('/address');
+              },
+              trailing: const Icon(Icons.keyboard_arrow_right_rounded),
+            ),
+            ListTile(
+              leading: const Icon(Icons.password),
+              title: const Text('Alterar Senha'),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => ChangePasswordDialog(),
+                );
               },
               trailing: const Icon(Icons.keyboard_arrow_right_rounded),
             ),
